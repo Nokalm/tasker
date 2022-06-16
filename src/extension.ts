@@ -18,6 +18,9 @@ export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('tasker.fetchTasks', () => {
 		tasksTreeProvider.fetch();
 	});
+	
+	const taskWatcher = vscode.workspace.createFileSystemWatcher('**/.vscode/tasks.json');
+	taskWatcher.onDidChange(()=>vscode.commands.executeCommand('tasker.fetchTasks'));
 
 	context.subscriptions.push(disposable);
 
