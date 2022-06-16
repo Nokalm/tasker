@@ -27,6 +27,13 @@ export class TaskTreeItem extends vscode.TreeItem {
     public readonly task: vscode.Task
   ) {
     super(task.name, vscode.TreeItemCollapsibleState.None);
+    if(task.definition.type == "process"){
+        this.tooltip = `${(task.execution as vscode.ProcessExecution).process + ' ' + (task.execution as vscode.ProcessExecution).args }`;
+    }else if(task.definition.type == "shell") {
+        this.tooltip = `${(task.execution as vscode.ShellExecution).commandLine || (task.execution as vscode.ShellExecution).command + ' ' + (task.execution as vscode.ShellExecution).args}`;
+    }else {
+        this.tooltip = undefined
+    }
     this.iconPath = new vscode.ThemeIcon(icons[task.definition.type])
     this.task = task
   }
