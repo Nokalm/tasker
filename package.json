@@ -3,6 +3,8 @@
 	"displayName": "tasker",
 	"description": "Run task with ease via explorer",
 	"version": "0.0.1",
+	"author": "Nokalm",
+	"repository": "https://github.com/Nokalm/tasker",
 	"engines": {
 		"vscode": "^1.68.0"
 	},
@@ -10,16 +12,49 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:tasker.helloWorld"
+        "onCommand:tasker.fetchTasks",
+		"workspaceContains:.vscode/tasks.json",
+		"onView:tasksExplorer"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "tasker.helloWorld",
-				"title": "Hello World"
+				"command": "tasker.fetchTasks",
+				"title": "Fetch tasks",
+				"icon": "$(extensions-refresh)"
+			},
+			{
+				"command": "tasker.executeTask",
+				"title": "Execute Task",
+				"icon": "$(play)"
 			}
-		]
+		],
+		"views":{
+			"explorer":[
+				{
+					"id": "tasksExplorer",
+					"name": "Tasks"
+				}
+			]
+		},
+		"menus": {
+			"view/title": [
+				{
+					"command": "tasker.fetchTasks",
+					"when": "view == tasksExplorer",
+					"group": "navigation"
+				}
+			],
+			"view/item/context": [
+				{
+				  "command": "tasker.executeTask",
+				  "when": "view == tasksExplorer",
+				  "group": "inline"
+				}
+			  ]
+		}
+		
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run package",
