@@ -1,9 +1,11 @@
 {
-  "name": "tasker",
-	"displayName": "tasker",
+  "name": "taskview",
+	"displayName": "taskview",
 	"description": "Run task with ease via explorer",
 	"version": "0.0.1",
+	"icon": "resources/task.png",
 	"author": "Nokalm",
+	"publisher": "Nokalm",
 	"repository": "https://github.com/Nokalm/tasker",
 	"engines": {
 		"vscode": "^1.68.0"
